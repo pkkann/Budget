@@ -1,0 +1,14 @@
+{
+    "index": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "index",
+        "authprotected": true
+    },
+	"getpostsjson": {
+		"controller": "BudgetsController",
+		"model": "BudgetsModel",
+		"method": "getPostsJSON",
+		"authprotected": true
+	}
+}

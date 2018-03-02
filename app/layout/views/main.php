@@ -16,6 +16,9 @@
         <a class="item <?=$this->e($this->menuActive("dashboard", "index"))?>" href="<?=$this->e($this->action("dashboard", "index"))?>">
 			Dashboard
 		</a>
+		<a class="item <?=$this->e($this->menuActive("budgets", "index"))?>" href="<?=$this->e($this->action("budgets", "index"))?>">
+			Budgetter
+		</a>
 		<a class="item <?=$this->e($this->menuActive("users", "index"))?>" href="<?=$this->e($this->action("users", "index"))?>">
 			Brugere
 		</a>

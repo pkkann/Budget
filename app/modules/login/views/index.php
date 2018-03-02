@@ -30,8 +30,8 @@
         <p></p>
     </div>
     <div class="ui segment login">
-        <h2>Hønens indskrivning</h2>
-        <form class="ui form" method="post" id="loginform" action="<?= $this->e($this->action("login", "authenticate")) ?>">
+        <h2>Budget</h2>
+        <form class="ui form" method="post" id="loginform" action="?module=login&action=authenticate">
             <div class="field">
                 <div class="ui left icon input">
                     <input placeholder="Brugernavn" type="text" name="username">
@@ -59,7 +59,7 @@
 <script>
 $("#loginform input[name=username]").focus();
 
-$("#loginform").submit(function() {
+$("#loginform").submit(function(e) {
     $("#loginform button.primary").addClass("loading");
 });
 
@@ -70,7 +70,7 @@ $("#loginform").ajaxForm({
             $(".errormsg p").html(e.error).parent().removeClass("hidden");
 			$("#loginform input[name=password]").val("").focus();
         } else {
-            window.location.href = "<?= $this->e($this->action("login", "authenticate")) ?>";
+            window.location.href = "";
         }
     }
 });

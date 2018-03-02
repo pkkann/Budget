@@ -20,9 +20,21 @@
 		
 		<!-- Font awesome -->
 		<link rel="stylesheet" href="libs/fontawesome/css/font-awesome.min.css">
+		
+		<script>
+		function showLoading() {
+			$("#loader").addClass("active");
+		}
+		function hideLoading() {
+			$("#loader").removeClass("active");
+		}
+		</script>
 	</head>
 	<body>
 		<?=$this->section('content')?>
+		<div id="loader" class="ui dimmer">
+			<div class="ui text loader">Henter budget</div>
+		</div>
 		<div id="toast"></div>
 	</body>
 </html>

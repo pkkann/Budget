@@ -65,7 +65,8 @@ class Router extends Singleton {
 				if( !class_exists($action->model) ) {
 					throw new RouterException("Model '".$action->model."' seems to be wrongly named in model file in module '".$_GET['module']."'");
 				}
-				$db = new PDO("mysql:host=localhost;port=3306;dbname=hoes;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+				$db = new PDO("mysql:host=".$GLOBALS['mysql']['host'].";port=".$GLOBALS['mysql']['port'].";dbname=".$GLOBALS['mysql']['db'].";charset=utf8", $GLOBALS['mysql']['user'], $GLOBALS['mysql']['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+				
 				$model = new $action->model($db);
 			}
 
