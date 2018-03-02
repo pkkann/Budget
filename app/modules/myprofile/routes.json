@@ -1,0 +1,17 @@
+{
+    "index": {
+        "controller": "MyProfileController",
+        "method": "index",
+		"model": "MyProfileModel"
+    },
+	"save": {
+		"controller": "MyProfileController",
+		"method": "save",
+		"model": "MyProfileModel"
+	},
+	"savenewpass": {
+		"controller": "MyProfileController",
+		"method": "saveNewPass",
+		"model": "MyProfileModel"
+	}
+}
