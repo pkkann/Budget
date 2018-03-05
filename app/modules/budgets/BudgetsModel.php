@@ -16,7 +16,7 @@ class BudgetsModel extends BaseModel {
 		12 	=> "Dec"
 	);
 	
-	public function getBudgets()
+	public function getBudgets() 
 	{
 		$sql = "
 			SELECT
@@ -28,6 +28,28 @@ class BudgetsModel extends BaseModel {
 				`name` ASC
 		";
 		$stmt = $this->db->prepare($sql);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
+	}
+	
+	public function getPosts($type) 
+	{
+		$sql = "
+			SELECT
+				`id`,
+				`name`
+			FROM
+				`post`
+			WHERE
+				`budget_id`		= :budget_id
+			AND
+				`type`			= :type
+			ORDER BY
+				`name`
+		";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":budget_id", $_SESSION['budget_id']);
+		$stmt->bindParam(":type", $type);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}

@@ -2,11 +2,16 @@
     "index_view": {
         "controller": "BudgetsController",
 		"model": "BudgetsModel",
-        "method": "index_VIEW"
+        "method": "indexView"
     },
-    "newbudget_view": {
-        "controller": "BudgetsController",
-        "model": "BudgetsModel",
-        "method": "newBudget_VIEW"
-    }
+	"setbudget": {
+		"controller": "BudgetsController",
+		"model": "BudgetsModel",
+		"method": "setBudget"
+	},
+	"getpostsjson": {
+		"controller": "BudgetsController",
+		"model": "BudgetsModel",
+		"method": "getPostsJSON"
+	}
 }

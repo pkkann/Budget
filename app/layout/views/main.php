@@ -14,17 +14,8 @@
 <div id="top" class="ui top fixed menu">
     <div class="ui container">
 		<a class="item" href="?module=budgets&action=index_view">
-			Budgetter
+			Oversigt
 		</a>
-		<div class="menu right">
-			<div class="item">
-				<select class="ui dropdown">
-				</select>
-			</div>
-			<div class="item">
-				<button class="ui button">Budgetter</button>
-			</div>
-		</div>
     </div>
 </div>
 <div id="content">
@@ -36,5 +27,8 @@
 <script>
 $('.ui.dropdown')
   .dropdown()
+;
+$('.menu .item')
+  .tab()
 ;
 </script>
