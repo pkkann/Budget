@@ -1,7 +1,0 @@
-{
-    "index": {
-        "controller": "DashboardController",
-        "method": "index",
-        "authprotected": true
-    }
-}

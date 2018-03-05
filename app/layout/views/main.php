@@ -13,26 +13,18 @@
 </style>
 <div id="top" class="ui top fixed menu">
     <div class="ui container">
-        <a class="item <?=$this->e($this->menuActive("dashboard", "index"))?>" href="<?=$this->e($this->action("dashboard", "index"))?>">
-			Dashboard
-		</a>
-		<a class="item <?=$this->e($this->menuActive("budgets", "index"))?>" href="<?=$this->e($this->action("budgets", "index"))?>">
+		<a class="item" href="?module=budgets&action=index_view">
 			Budgetter
 		</a>
-		<a class="item <?=$this->e($this->menuActive("users", "index"))?>" href="<?=$this->e($this->action("users", "index"))?>">
-			Brugere
-		</a>
-        <div class="right menu">
-            <div class="ui dropdown item">
-                <div class="text"><i class="user circle icon"></i> Min profil</div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-					<a class="item <?=$this->e($this->menuActive("myprofile", "index"))?>" href="<?=$this->e($this->action("myprofile", "index"))?>">Rediger min profil</a>
-					<div class="divider"></div>
-                    <a class="item" href="<?=$this->e($this->action("login", "deauthenticate"))?>">Log ud</a>
-                </div>
-            </div>
-        </div>
+		<div class="menu right">
+			<div class="item">
+				<select class="ui dropdown">
+				</select>
+			</div>
+			<div class="item">
+				<button class="ui button">Budgetter</button>
+			</div>
+		</div>
     </div>
 </div>
 <div id="content">

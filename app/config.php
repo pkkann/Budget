@@ -1,7 +1,7 @@
 <?php
-$GLOBALS['base_url'] 				= "http://localhost/xampp/budget/public_html";
+$GLOBALS['base_url'] 				= "http://localhost/Projects/budget/public_html";
 
-$GLOBALS['defaultRoute'] 			= array("login", "index");
+$GLOBALS['defaultRoute'] 			= array("budgets", "index_view");
 
 $GLOBALS['debug'] 					= true;
 
@@ -11,6 +11,6 @@ $GLOBALS['mysql'] 					= array(
 					'host' => 'localhost',
 					'port' => 3306,
 					'user' => 'root',
-					'pass' => 'secret',
+					'pass' => '',
 					'db' => 'budget'
 );

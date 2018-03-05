@@ -1,14 +1,12 @@
 {
-    "index": {
+    "index_view": {
         "controller": "BudgetsController",
 		"model": "BudgetsModel",
-        "method": "index",
-        "authprotected": true
+        "method": "index_VIEW"
     },
-	"getpostsjson": {
-		"controller": "BudgetsController",
-		"model": "BudgetsModel",
-		"method": "getPostsJSON",
-		"authprotected": true
-	}
+    "newbudget_view": {
+        "controller": "BudgetsController",
+        "model": "BudgetsModel",
+        "method": "newBudget_VIEW"
+    }
 }

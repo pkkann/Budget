@@ -2,52 +2,30 @@
 
 <div class="ui segment">
     
-	<div class="ui form">
-		<div class="field" style="width: 200px;">
-			<label>Budget</label>
-			<select class="ui dropdown" id="yearselect">
+	<div class="ui secondary  menu">
+		<div class="item">
+			<select class="ui dropdown">
+			<?php if(count($budgets)): ?>
 			<?php foreach($budgets as $budget): ?>
-				<option value="<?= $budget->id ?>"><?= $budget->year ?></option>
+				<option value="<?= $budget->id ?>"><?= $budget->name ?></option>
 			<?php endforeach; ?>
+			<?php else: ?>
+				<option value="">Ingen budgetter</option>
+			<?php endif; ?>
 			</select>
+		</div>
+		<div class="item">
+			<button class="ui button" onclick="window.location.href='?module=budgets&action=newbudget_view'">Nyt budget</button>
+		</div>
+		<div class="right menu">
+			<div class="item">
+				<button class="ui teal button"><i class="fa fa-cog"></i></button>
+			</div>
 		</div>
 	</div>
 	
-	<h3>Udgifter</h3>
-	<table class="ui red celled table budgettable">
-		<thead>
-			<tr>
-				<th></th>
-				<?php foreach($months as $month): ?>
-				<th><?= $month ?></th>
-				<?php endforeach; ?>
-			</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
-	
 </div>
 
-
-
-<style>
-.budgettable tr th, .budgettable tr td {
-	width: 100px;
-}
-</style>
-
 <script>
-$("#yearselect").change(function() {
-	showLoading();
-	loadPosts();
-});
-function loadPosts()
-{
-	$budget_id = $("#yearselect").val();
-	
-	
-}
-loadPosts();
+
 </script>

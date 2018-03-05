@@ -1,7 +1,0 @@
-{
-    "index": {
-        "controller": "UsersController",
-        "method": "index",
-		"model": "UsersModel"
-    }
-}

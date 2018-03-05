@@ -21,36 +21,13 @@ class BudgetsModel extends BaseModel {
 		$sql = "
 			SELECT
 				`id`,
-				`year`
+				`name`
 			FROM
 				`budget`
-			ORDER BY
-				`year` DESC
-		";
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute();
-		return $stmt->fetchAll(PDO::FETCH_OBJ);
-	}
-	
-	public function getPosts($budget_id, $type)
-	{
-		$sql = "
-			SELECT
-				`id`,
-				`name`,
-				`amount`
-			FROM
-				`post`
-			WHERE
-				`budget_id` = :budget_id
-			AND
-				`type`		= :type
 			ORDER BY
 				`name` ASC
 		";
 		$stmt = $this->db->prepare($sql);
-		$stmt->bindParam(":budget_id", $budget_id);
-		$stmt->bindParam(":type", $type);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
