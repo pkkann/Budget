@@ -1,7 +1,7 @@
 <?php $this->layout('layouts::main') ?>
 
 <div class="ui segment">
-    
+
 	<div class="ui secondary menu">
 		<div class="item">
 			<select class="ui dropdown" id="budgets">
@@ -15,16 +15,17 @@
 			</select>
 		</div>
 		<div class="item">
-			<button class="ui teal button"><i class="fa fa-cog"></i></button>
+			<button class="ui teal button pop" data-content="Administrer budgetter"><i class="fa fa-cog"></i></button>
 		</div>
 	</div>
 	
 	<h3>Udgifter</h3>
-	<table class="ui red celled table" id="expenses">
+	<table class="ui red compact celled table" id="expenses">
 		<thead>
 			<tr>
 				<th>
-					<button class="ui tiny red button"><i class="fa fa-plus"></i></button>
+					<button class="ui tiny button pop" data-content="Ny udgift"><i class="fa fa-plus"></i></button>
+					<button class="ui tiny button pop" data-content="Lås op for redigering"><i class="fa fa-lock"></i></button>
 				</th>
 				<?php foreach($months as $month): ?>
 				<th><?=$month?></th>
@@ -33,14 +34,16 @@
 		</thead>
 		<tbody>
 		</tbody>
+		<tfoot>
+		</tfoot>
 	</table>
 	
 	<h3>Indtægter</h3>
-	<table class="ui green celled table" id="income">
+	<table class="ui green compact celled table" id="income">
 		<thead>
 			<tr>
 				<th>
-					<button class="ui tiny green button"><i class="fa fa-plus"></i></button>
+					<button class="ui tiny button pop" data-content="Ny indtægt"><i class="fa fa-plus"></i></button>
 				</th>
 				<?php foreach($months as $month): ?>
 				<th><?=$month?></th>
@@ -49,14 +52,16 @@
 		</thead>
 		<tbody>
 		</tbody>
+		<tfoot>
+		</tfoot>
 	</table>
 	
 	<h3>Rådigheder</h3>
-	<table class="ui orange celled table" id="availability">
+	<table class="ui orange compact celled table" id="disposables">
 		<thead>
 			<tr>
 				<th>
-					<button class="ui tiny orange button"><i class="fa fa-plus"></i></button>
+					<!--<button class="ui tiny button pop" data-content="Ny rådigheds visning"><i class="fa fa-plus"></i></button>-->
 				</th>
 				<?php foreach($months as $month): ?>
 				<th><?=$month?></th>
@@ -65,6 +70,8 @@
 		</thead>
 		<tbody>
 		</tbody>
+		<tfoot>
+		</tfoot>
 	</table>
 	
 </div>
@@ -92,34 +99,58 @@ $("#budgets").change(function() {
 	});
 });
 
+var doneLoading = [0, 0];
 function load() {
-	// Expenses
-	$.get("?module=budgets&action=getpostsjson&type=expense", function(data) {
-		var html = '';
-		data.forEach(function(e) {
-			html += '<tr>';
-				html += '<td>'+e.name+'</td>';
-				for(var i = 0; i < 12; i++) {
+	loadTable("expenses", "expense", true, function() {
+		loadTable("income", "income", true, function() {
+			var html = '';
+			$.get("?module=budgets&action=getdisposablesjson", function(data) {
+				html += '<tr>';
 					html += '<td></td>';
+				for(var i = 1; i <= 12; i++) {
+					var value = ( typeof data[i] != 'undefined' ? data[i] : "-" );
+					html += '<td>'+value+'</td>';
 				}
-			html += '</tr>';
+				html += '</tr>';
+				$("#disposables tbody").html(html);
+			});
+			
 		});
-		$("#expenses tbody").html(html);
-	});
-	
-	// Incomes
-	$.get("?module=budgets&action=getpostsjson&type=income", function(data) {
-		var html = '';
-		data.forEach(function(e) {
-			html += '<tr>';
-				html += '<td>'+e.name+'</td>';
-				for(var i = 0; i < 12; i++) {
-					html += '<td></td>';
-				}
-			html += '</tr>';
-		});
-		$("#income tbody").html(html);
 	});
 }
+
+function loadTable(id, type, showTotal, callback) {
+	$.get("?module=budgets&action=getpostsjson&type="+type, function(data) {
+		var html = '';
+		data.posts.forEach(function(e) {
+			html += '<tr>';
+				html += '<td>'+e.name+'</td>';
+				for(var i = 1; i <= 12; i++) {
+					var value = ( typeof e.values[i] != 'undefined' ? e.values[i].value : "-" );
+					html += '<td>'+value+'</td>';
+				}
+			html += '</tr>';
+		});
+		$("#"+id+" tbody").html(html);
+		
+		if(typeof showTotal != 'undefined' && showTotal == true) {
+			var html = '';
+			html += '<tr>';
+				html += '<th><b>Total</b></th>';
+				for(var i = 1; i <= 12; i++) {
+					var value = ( typeof data.total[i]!= 'undefined' ? data.total[i] : "-" );
+					html += '<th><b>'+value+'</b></th>';
+				}
+			html += '</tr>';
+			$("#"+id+" tfoot").html(html);
+		}
+		
+		if(typeof callback != 'undefined' && typeof callback == 'function') {
+			callback();
+			console.log("lol");
+		}
+	});
+}
+
 load();
 </script>

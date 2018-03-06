@@ -13,5 +13,10 @@
 		"controller": "BudgetsController",
 		"model": "BudgetsModel",
 		"method": "getPostsJSON"
+	},
+	"getdisposablesjson": {
+		"controller": "BudgetsController",
+		"model": "BudgetsModel",
+		"method": "getDisposablesJSON"
 	}
 }

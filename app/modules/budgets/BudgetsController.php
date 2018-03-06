@@ -12,6 +12,10 @@ class BudgetsController extends BaseController {
 		{
 			$_SESSION['budget_id'] = $data['budgets'][0]->id;
 		}
+		if(!isset($_SESSION['year'])) 
+		{
+			$_SESSION['year'] = date("Y");
+		}
         echo $this->plates->render('views::index', $data);
 	}
 	
@@ -25,6 +29,13 @@ class BudgetsController extends BaseController {
 		$posts = $this->model->getPosts($type);
 		$this->loadHelper("api");
 		$this->api->outputJSON($posts);
+	}
+	
+	public function getDisposablesJSON()
+	{
+		$disposables = $this->model->getDisposables();
+		$this->loadHelper("api");
+		$this->api->outputJSON($disposables);
 	}
 
 }

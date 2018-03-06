@@ -31,4 +31,7 @@ $('.ui.dropdown')
 $('.menu .item')
   .tab()
 ;
+$('.pop')
+  .popup()
+;
 </script>
