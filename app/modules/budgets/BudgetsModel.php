@@ -34,6 +34,9 @@ class BudgetsModel extends BaseModel {
 	
 	public function getPosts($type, $formatNumbers = true, $totalsOnly = false) 
 	{
+		if($type == "disposable") {
+			return $this->getDisposables($formatNumbers);
+		}
 		$return = (object)array();
 		$total = array();
 		for($i = 1; $i <= 12; $i++) {
@@ -107,21 +110,65 @@ class BudgetsModel extends BaseModel {
 	{
 		$income 	= $this->getPosts("income", false, true)->total;
 		$expenses 	= $this->getPosts("expense", false, true)->total;
+		$return		= (object)array();
 		
-		$disposables = array();
+		// Calculate total
+		$total = array();
 		for($i = 1; $i <= 12; $i++) {
-			$disposables[$i] = $income[$i] - $expenses[$i];
-			
-			if($disposables[$i] == 0.0) {
-				$disposables[$i] = "";
-			}
-			
-			if($formatNumbers) {
-				if($disposables[$i] != "") {
-					$disposables[$i] = number_format($disposables[$i], 2, ",", ".");
+			$total[$i] = $income[$i] - $expenses[$i];
+		}
+		
+		$posts = array();
+		
+		// Weekly post
+		$weekly = (object)array(
+			'name' 		=> "Ugentlig",
+			'values'	=> array()
+		);
+		for($i = 1; $i <= 12; $i++) {
+			if(!empty($total[$i])) {
+				$v = $total[$i] / 4;
+				if($formatNumbers) {
+					$v = number_format($v, 2, ",", ".");
 				}
+				$weekly->values[$i] = (object)array(
+					'month' 	=> $i,
+					'value'		=> $v
+				);
 			}
 		}
-		return $disposables;
+		array_push($posts, $weekly);
+		
+		// Daily post
+		$daily = (object)array(
+			'name'		=> "Dagligt",
+			'values'	=> array()
+		);
+		for($i = 1; $i <= 12; $i++) {
+			if(!empty($total[$i])) {
+				$days = date("t", strtotime($_SESSION['year']."-".$i."-01"));
+				$v = $total[$i] / $days;
+				if($formatNumbers) {
+					$v = number_format($v, 2, ",", ".");
+				}
+				$daily->values[$i] = (object)array(
+					'month'		=> $i,
+					'value'		=> $v
+				);
+			}
+		}
+		array_push($posts, $daily);
+		
+		// Format total
+		if($formatNumbers) {
+			foreach($total as &$t) {
+				$t = number_format($t, 2, ",", ".");
+			}
+		}
+		
+		$return->posts = $posts;
+		$return->total = $total;
+		
+		return $return;
 	}
 }

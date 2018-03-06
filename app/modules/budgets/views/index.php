@@ -4,18 +4,28 @@
 
 	<div class="ui secondary menu">
 		<div class="item">
-			<select class="ui dropdown" id="budgets">
-			<?php if(count($budgets) > 0): ?>
-				<?php foreach($budgets as $budget): ?>
-				<option value="<?=$budget->id?>" <?= ($_SESSION['budget_id'] == $budget->id ? "selected" : "") ?>><?=$budget->name?></option>
-				<?php endforeach; ?>
-			<?php else: ?>
-				<option value="">Ingen budgetter</option>
-			<?php endif; ?>
-			</select>
+			<button class="ui tiny button pop" data-content="Ny post" onclick="openNewPost()"><i class="fa fa-plus"></i></button>
 		</div>
-		<div class="item">
-			<button class="ui teal button pop" data-content="Administrer budgetter"><i class="fa fa-cog"></i></button>
+		<div class="menu right">
+			<div class="item">
+				<button class="ui teal button pop" data-content="Administrer budgetter"><i class="fa fa-cog"></i></button>
+			</div>
+			<div class="item">
+				<select class="ui dropdown" id="budgets">
+				<?php if(count($budgets) > 0): ?>
+					<?php foreach($budgets as $budget): ?>
+					<option value="<?=$budget->id?>" <?= ($_SESSION['budget_id'] == $budget->id ? "selected" : "") ?>><?=$budget->name?></option>
+					<?php endforeach; ?>
+				<?php else: ?>
+					<option value="">Ingen budgetter</option>
+				<?php endif; ?>
+				</select>
+			</div>
+			<div class="item">
+				<select class="ui fluid dropdown" id="budgets">
+					<option>2018</option>
+				</select>
+			</div>
 		</div>
 	</div>
 	
@@ -24,8 +34,7 @@
 		<thead>
 			<tr>
 				<th>
-					<button class="ui tiny button pop" data-content="Ny udgift"><i class="fa fa-plus"></i></button>
-					<button class="ui tiny button pop" data-content="Lås op for redigering"><i class="fa fa-lock"></i></button>
+					<!--<button class="ui tiny button pop" data-content="Ny udgift"><i class="fa fa-plus"></i></button>-->
 				</th>
 				<?php foreach($months as $month): ?>
 				<th><?=$month?></th>
@@ -43,7 +52,7 @@
 		<thead>
 			<tr>
 				<th>
-					<button class="ui tiny button pop" data-content="Ny indtægt"><i class="fa fa-plus"></i></button>
+					<!--<button class="ui tiny button pop" data-content="Ny indtægt"><i class="fa fa-plus"></i></button>-->
 				</th>
 				<?php foreach($months as $month): ?>
 				<th><?=$month?></th>
@@ -90,6 +99,12 @@
 	width: 20%;
 	text-align: left;
 }
+.ui.table tfoot th {
+	text-align: right;
+}
+.ui.table tfoot th:first-child {
+	text-align: left;
+}
 </style>
 
 <script>
@@ -103,18 +118,7 @@ var doneLoading = [0, 0];
 function load() {
 	loadTable("expenses", "expense", true, function() {
 		loadTable("income", "income", true, function() {
-			var html = '';
-			$.get("?module=budgets&action=getdisposablesjson", function(data) {
-				html += '<tr>';
-					html += '<td></td>';
-				for(var i = 1; i <= 12; i++) {
-					var value = ( typeof data[i] != 'undefined' ? data[i] : "-" );
-					html += '<td>'+value+'</td>';
-				}
-				html += '</tr>';
-				$("#disposables tbody").html(html);
-			});
-			
+			loadTable("disposables", "disposable", true);
 		});
 	});
 }
@@ -147,10 +151,11 @@ function loadTable(id, type, showTotal, callback) {
 		
 		if(typeof callback != 'undefined' && typeof callback == 'function') {
 			callback();
-			console.log("lol");
 		}
 	});
 }
 
 load();
 </script>
+
+<?php $this->insert("views::new_post_modal") ?>

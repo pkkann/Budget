@@ -14,6 +14,11 @@ class LayoutController extends BaseController {
             }
         });
 		
+		$this->plates->registerFunction("modal", function($title, $content, $actions, $id = "modal", $options= null) {
+			$this->loadHelper("modal");
+			return $this->modal->make($title, $content, $actions, $id, $options);
+		});
+		
 		$this->plates->registerFunction("objPHPToJS", function($obj) {
 			$t = "{";
 			$s = false;
