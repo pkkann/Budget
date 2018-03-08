@@ -16,6 +16,11 @@ class BudgetsModel extends BaseModel {
 		12 	=> "Dec"
 	);
 	
+	public $postTypes = array(
+		'expense'		=> "Udgift",
+		'income'		=> "Indtægt"
+	);
+	
 	public function getBudgets() 
 	{
 		$sql = "
@@ -30,6 +35,30 @@ class BudgetsModel extends BaseModel {
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
+	}
+	
+	public function getYears()
+	{
+		return array("2018");
+	}
+	
+	public function insertPost($name, $type)
+	{
+		$sql = "
+			INSERT INTO
+				`post`
+			SET
+				`name` 				= :name,
+				`type`				= :type,
+				`budget_id`			= :budget_id,
+				`createtimestamp`	= UNIX_TIMESTAMP(),
+				`updatetimestamp`	= UNIX_TIMESTAMP()
+		";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":name", $name);
+		$stmt->bindParam(":type", $type);
+		$stmt->bindParam(":budget_id", $_SESSION['budget_id']);
+		$stmt->execute();
 	}
 	
 	public function getPosts($type, $formatNumbers = true, $totalsOnly = false) 

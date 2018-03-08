@@ -14,9 +14,9 @@
 		"model": "BudgetsModel",
 		"method": "getPostsJSON"
 	},
-	"getdisposablesjson": {
+	"createpost": {
 		"controller": "BudgetsController",
 		"model": "BudgetsModel",
-		"method": "getDisposablesJSON"
+		"method": "createPost"
 	}
 }

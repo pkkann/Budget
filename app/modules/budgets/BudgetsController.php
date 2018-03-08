@@ -6,7 +6,9 @@ class BudgetsController extends BaseController {
         $this->loadHelper("url");
 		$data = array(
 			'budgets' 	=> $this->model->getBudgets(),
-			'months' 	=> $this->model->months
+			'months' 	=> $this->model->months,
+			'years'		=> $this->model->getYears(),
+			'posttypes'	=> $this->model->postTypes
 		);
 		if(!isset($_SESSION['budget_id'])) 
 		{
@@ -22,6 +24,17 @@ class BudgetsController extends BaseController {
 	public function setBudget($budget_id) 
 	{
 		$_SESSION['budget_id'] = $budget_id;
+	}
+	
+	public function createPost()
+	{
+		$name 	= $_POST['name'];
+		$type 	= $_POST['type'];
+		
+		$this->model->insertPost($name, $type);
+		
+		$this->loadHelper("api");
+		$this->api->outputJSON(array('error' => false));
 	}
 	
 	public function getPostsJSON($type)

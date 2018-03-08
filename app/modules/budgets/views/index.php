@@ -4,7 +4,11 @@
 
 	<div class="ui secondary menu">
 		<div class="item">
-			<button class="ui tiny button pop" data-content="Ny post" onclick="openNewPost()"><i class="fa fa-plus"></i></button>
+			<button class="ui tiny primary button pop" data-content="Ny post" onclick="openNewPost()"><i class="fa fa-plus"></i></button>
+		</div>
+		<div class="item">
+			<button id="unlockeditbtn" class="ui tiny orange button pop" data-content="Lås op for redigering" onclick="unlockEdit()"><i class="fa fa-lock"></i></button>
+			<button id="lockeditbtn" style="display:none" class="ui tiny red button pop" data-content="Lås redigering" onclick="lockEdit()"><i class="fa fa-unlock"></i></button>
 		</div>
 		<div class="menu right">
 			<div class="item">
@@ -23,7 +27,9 @@
 			</div>
 			<div class="item">
 				<select class="ui fluid dropdown" id="budgets">
-					<option>2018</option>
+				<?php foreach($years as $year): ?>
+					<option value="<?=$year?>"><?=$year?></option>
+				<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
@@ -114,7 +120,20 @@ $("#budgets").change(function() {
 	});
 });
 
-var doneLoading = [0, 0];
+function unlockEdit() {
+	$("#unlockeditbtn").hide();
+	$("#lockeditbtn").show();
+	$(".delbtn").show();
+	$(".noneeditcell").hide();
+	$(".editcell").show();
+}
+
+function lockEdit() {
+	$("#unlockeditbtn").show();
+	$("#lockeditbtn").hide();
+	$(".delbtn").hide();
+}
+
 function load() {
 	loadTable("expenses", "expense", true, function() {
 		loadTable("income", "income", true, function() {
@@ -128,10 +147,14 @@ function loadTable(id, type, showTotal, callback) {
 		var html = '';
 		data.posts.forEach(function(e) {
 			html += '<tr>';
-				html += '<td>'+e.name+'</td>';
+				html += '<td><button class="ui mini red button delbtn" style="display:none;margin-right:5px"><i class="fa fa-times"></i></button>'+e.name+'</td>';
 				for(var i = 1; i <= 12; i++) {
 					var value = ( typeof e.values[i] != 'undefined' ? e.values[i].value : "-" );
-					html += '<td>'+value+'</td>';
+					//html += '<td>'+value+'</td>';
+					html += '<td>';
+						html += '<span class="noneeditcell">'+value+'</span>';
+						html += '<span style="display:none" class="ui input editcell"><input type="text" value="'+value+'"></span>';
+					html += '</td>';
 				}
 			html += '</tr>';
 		});
@@ -158,4 +181,4 @@ function loadTable(id, type, showTotal, callback) {
 load();
 </script>
 
-<?php $this->insert("views::new_post_modal") ?>
+<?php $this->insert("views::new_post_modal", array('posttypes' => $posttypes)) ?>
