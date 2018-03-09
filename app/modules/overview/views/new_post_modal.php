@@ -1,6 +1,6 @@
 <?php 
 $content = '';
-$content .= '<form class="ui form" id="newpostform" method="post" action="?module=budgets&action=createpost">';
+$content .= '<form class="ui form" id="newpostform" method="post" action="?module=overview&action=createpost">';
 	$content .= '<div class="field">';
 		$content .= '<label>Navn</label>';
 		$content .= '<input type="text" name="name" value="">';

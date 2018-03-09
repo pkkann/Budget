@@ -3,20 +3,5 @@
         "controller": "BudgetsController",
 		"model": "BudgetsModel",
         "method": "indexView"
-    },
-	"setbudget": {
-		"controller": "BudgetsController",
-		"model": "BudgetsModel",
-		"method": "setBudget"
-	},
-	"getpostsjson": {
-		"controller": "BudgetsController",
-		"model": "BudgetsModel",
-		"method": "getPostsJSON"
-	},
-	"createpost": {
-		"controller": "BudgetsController",
-		"model": "BudgetsModel",
-		"method": "createPost"
-	}
+    }
 }

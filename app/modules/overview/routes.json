@@ -1,0 +1,22 @@
+{
+    "index_view": {
+        "controller": "OverviewController",
+		"model": "OverviewModel",
+        "method": "indexView"
+    },
+	"setbudget": {
+		"controller": "OverviewController",
+		"model": "OverviewModel",
+		"method": "setBudget"
+	},
+	"getpostsjson": {
+		"controller": "OverviewController",
+		"model": "OverviewModel",
+		"method": "getPostsJSON"
+	},
+	"createpost": {
+		"controller": "OverviewController",
+		"model": "OverviewModel",
+		"method": "createPost"
+	}
+}

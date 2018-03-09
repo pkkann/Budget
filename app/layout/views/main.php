@@ -13,8 +13,11 @@
 </style>
 <div id="top" class="ui top fixed menu">
     <div class="ui container">
-		<a class="item" href="?module=budgets&action=index_view">
+		<a class="item" href="?module=overview&action=index_view">
 			Oversigt
+		</a>
+		<a class="item" href="?module=budgets&action=index_view">
+			Budgetter
 		</a>
     </div>
 </div>
