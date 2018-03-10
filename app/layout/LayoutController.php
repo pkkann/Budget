@@ -2,6 +2,18 @@
 class LayoutController extends BaseController {
 
     public function init() {
+		$this->loadSharedModel("BudgetModel");
+		if(!isset($_SESSION['budget_id'])) {
+			$budgets = $this->smodels->budgetmodel->getBudgets();
+			$_SESSION['budget_id'] = $budgets[0]->id;
+		}
+		if(!isset($_SESSION['month'])) {
+			$_SESSION['month'] = date("n");
+		}
+		if(!isset($_SESSION['year'])) {
+			$_SESSION['year'] = date("Y");
+		}
+
         $this->loadHelper("url");
 
         $this->plates->registerFunction("action", function($module, $action) {

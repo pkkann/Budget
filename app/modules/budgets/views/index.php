@@ -9,7 +9,11 @@
         <p>Klik på et budget for at redigere</p>
     </div>
 </div>
-<button class="ui primary button" onclick="showCreateModal()">Nyt budget</button>
+<div class="ui secondary  menu">
+    <div class="item">
+    <button class="ui primary button" onclick="showCreateModal()">Nyt budget</button>
+    </div>
+</div>
 <table class="ui celled selectable table" id="table">
     <thead>
         <tr>
@@ -39,4 +43,4 @@ function loadTable()
 }
 </script>
 
-<?php $this->insert("views::cu_modal") ?>
+<?php $this->insert("views::cu_budget_modal") ?>

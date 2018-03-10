@@ -1,6 +1,40 @@
 <?php
 class BudgetModel extends BaseModel {
 
+    public $months = array(
+        1   => "Januar",
+        2   => "Februar",
+        3   => "Marts",
+        4   => "April",
+        5   => "Maj",
+        6   => "Juni",
+        7   => "Juli",
+        8   => "August",
+        9   => "September",
+        10  => "Oktober",
+        11  => "November",
+        12  => "December"
+    );
+
+    public function getYears()
+    {
+        $sql = "
+            SELECT DISTINCT
+                `year`
+            FROM
+                `post`
+            ORDER BY
+                `year` DESC
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN,0);
+        if(!in_array(date("Y"), $result)) {
+            array_unshift($result, date("Y"));
+        }
+        return $result;
+    }
+
     public function getBudgets()
     {
         $sql = "

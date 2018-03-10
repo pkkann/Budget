@@ -1,7 +1,10 @@
 {
     "show_index": {
         "controller"    : "OverviewController",
-        "model"         : "OverviewModel",
         "method"        : "showIndex"
+    },
+    "create_post": {
+        "controller"    : "OverviewController",
+        "method"        : "createPost"
     }
 }

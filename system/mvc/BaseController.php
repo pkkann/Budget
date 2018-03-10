@@ -33,7 +33,7 @@ class BaseController {
     {
         $sharedModel = strtolower(trim($sharedModel));
         if(file_exists("../app/shared_models/".ucfirst($sharedModel).".php")) {
-            require "../app/shared_models/".ucfirst($sharedModel).".php";
+            require_once "../app/shared_models/".ucfirst($sharedModel).".php";
             if($this->smodels == null) {
                 $this->smodels = (object)array();
             }
