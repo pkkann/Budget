@@ -3,7 +3,7 @@ class BaseModel {
 	
 	public $db;
 	
-	public function __construct($db) {
-		$this->db = $db;
+	public function __construct() {
+		$this->db = DBHelper::instance()->conn;
 	}
 }

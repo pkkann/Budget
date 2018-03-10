@@ -10,13 +10,16 @@
 		padding-top: 65px;
 		padding-bottom: 25px;
 	}
+	.table.selectable {
+		cursor: pointer;
+	}
 </style>
 <div id="top" class="ui top fixed menu">
     <div class="ui container">
-		<a class="item" href="?module=overview&action=index_view">
+		<a class="item" href="?module=overview&action=show_index">
 			Oversigt
 		</a>
-		<a class="item" href="?module=budgets&action=index_view">
+		<a class="item" href="?module=budgets&action=show_index">
 			Budgetter
 		</a>
     </div>

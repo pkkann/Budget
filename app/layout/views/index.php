@@ -33,7 +33,7 @@
 	<body>
 		<?=$this->section('content')?>
 		<div id="loader" class="ui dimmer">
-			<div class="ui text loader">Henter budget</div>
+			<div class="ui text loader">Øjeblik</div>
 		</div>
 		<div id="toast"></div>
 	</body>

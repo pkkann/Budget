@@ -1,7 +1,32 @@
 {
-    "index_view": {
+    "show_index": {
         "controller": "BudgetsController",
 		"model": "BudgetsModel",
-        "method": "indexView"
+        "method": "showIndex"
+    },
+    "get_budget": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "getBudget"
+    },
+    "get_budgets": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "getBudgets"
+    },
+    "create_budget": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "createBudget"
+    },
+    "update_budget": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "updateBudget"
+    },
+    "delete_budget": {
+        "controller": "BudgetsController",
+		"model": "BudgetsModel",
+        "method": "deleteBudget"
     }
 }

@@ -3,9 +3,6 @@ class Router extends Singleton {
 
     public function route() {
         if( isset($_GET['module']) && isset($_GET['action']) ) {
-			
-			// Init db
-			$db = new PDO("mysql:host=".$GLOBALS['mysql']['host'].";port=".$GLOBALS['mysql']['port'].";dbname=".$GLOBALS['mysql']['db'].";charset=utf8", $GLOBALS['mysql']['user'], $GLOBALS['mysql']['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             
             // Get parameters
             $params = $_GET;
@@ -55,7 +52,7 @@ class Router extends Singleton {
             // Instantiate layout controller
             require '../app/layout/LayoutController.php';
 			require '../app/layout/LayoutModel.php';
-			$layoutModel = new LayoutModel($db);
+			$layoutModel = new LayoutModel();
             $layoutController = new LayoutController($plates, $layoutModel);
             $layoutController->init();
 			
@@ -71,7 +68,7 @@ class Router extends Singleton {
 					throw new RouterException("Model '".$action->model."' seems to be wrongly named in model file in module '".$_GET['module']."'");
 				}
 				
-				$model = new $action->model($db);
+				$model = new $action->model();
 			}
 
             // Check controller exists
